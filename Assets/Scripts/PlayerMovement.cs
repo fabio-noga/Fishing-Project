@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     void Start(){
         myRigidBody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>();
+        OnDrawGizmosSelected();
     }
 
     // Update is called once per frame
@@ -34,8 +35,26 @@ public class PlayerMovement : MonoBehaviour
             //transform.LookAt(pointToLook);
 
         }
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            if(hitColliders[i].name!="Nose" && hitColliders[i].name != "Player" && hitColliders[i].name != "Cube")
+                Debug.Log(hitColliders[i].name);
+            Debug.DrawLine(transform.position, hitColliders[i].transform.position, Color.red);
+            if (hitColliders[i].name == "Fish") hitColliders[i].gameObject.isFroze=true;
+            //hitColliders[i].SendMessage("AddDamage");
+            i++;
+        }
+        //FishMovement.isFroze = false;
     }
     private void FixedUpdate() {
         myRigidBody.velocity = moveVelocity;
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(this.transform.position, 1);
     }
 }
