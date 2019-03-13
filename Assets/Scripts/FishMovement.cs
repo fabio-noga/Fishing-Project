@@ -10,7 +10,6 @@ public class FishMovement : MonoBehaviour
     private bool isWandering = false;
     private bool isRotating = false;
     private bool isWalking = false;
-    public static bool isFroze = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,17 +21,14 @@ public class FishMovement : MonoBehaviour
     {
         //if (!isWalking)
         //{
-        if (!isFroze)
-        {
             if (!isWandering) StartCoroutine(Walking());
-            if (isRotating)
+            if (isRotating) 
             {
                 int turning = Random.Range(-300, 300);
                 //transform.Rotate(transform.up * Time.deltaTime * turning);
                 transform.eulerAngles = new Vector3(0, turning, 0);
             }
             if (isWalking) transform.position += transform.forward * Time.deltaTime * moveSpeed;
-        }
         //}
         /*if (!isWandering) StartCoroutine(Wander());
         if (isRotatingRight) transform.Rotate(transform.up * Time.deltaTime * rotSpeed);

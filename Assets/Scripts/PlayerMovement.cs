@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             if(hitColliders[i].name!="Nose" && hitColliders[i].name != "Player" && hitColliders[i].name != "Cube")
                 Debug.Log(hitColliders[i].name);
             Debug.DrawLine(transform.position, hitColliders[i].transform.position, Color.red);
-            if (hitColliders[i].name == "Fish") hitColliders[i].gameObject.isFroze=true;
+            //if (hitColliders[i].name == "Fish") hitColliders[i].gameObject.isFroze=true;
             //hitColliders[i].SendMessage("AddDamage");
             i++;
         }
